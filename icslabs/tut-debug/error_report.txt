@@ -1,0 +1,124 @@
+/*
+ * BUG#0
+ * description: 
+     miss semicolon
+ * location: 
+ *   int a = 10  (line 18)
+ * evidence: 
+ *   test.c:19: error: two or more data types in declaration specifiers
+ */
+
+BUG#1
+description:
+miss semicolon
+
+location:
+enum { buf_size = buf_nrec * 100 } (line 52)
+
+evidence:
+gen_sort.c:54:9: error: expected ‘;’, identifier or ‘(’ before ‘struct’
+ typedef struct record {
+         ^~~~~~
+
+
+BUG#2
+description:
+miss semicolon
+
+location:
+} record_t (line 58)
+
+evidence:
+gen_sort.c:58:11: error: expected ‘;’ before ‘static’
+ } record_t
+           ^
+           ;
+
+
+
+BUG#3
+description:
+type name use error
+
+location:
+gen_rec(record *rec) (line 113)
+
+evidence:
+gen_sort.c:113:9: error: unknown type name ‘record’; did you mean ‘record_t’?
+ gen_rec(record *rec)
+         ^~~~~~
+         record_t
+
+
+BUG#4
+description:
+implicit declaration of function
+location:
+sprintf(rec->recno,"%10d",recno++);   (line 121) 
+evidence:
+gen_sort.c:121:2: warning: implicit declaration of function ‘sprintf’ [-Wimplicit-function-declaration]
+  sprintf(rec->recno, "%10d", recno++);
+  ^~~~~~~
+
+
+BUG#5
+description:
+} missing
+location:
+if (!file) (line 188)
+
+evidence:
+gen_sort.c:188:2: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  if (!file)
+  ^~
+
+
+
+
+BUG#6
+description:
+
+location:
+
+evidence:
+
+
+
+
+BUG#7
+description:
+
+location:
+
+evidence:
+
+
+
+
+BUG#8
+description:
+
+location:
+
+evidence:
+
+
+
+
+BUG#9
+description:
+
+location:
+
+evidence:
+
+
+
+
+BUG#10
+description:
+
+location:
+
+evidence:
+

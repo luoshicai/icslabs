@@ -1,0 +1,44 @@
+                            | #studen ID: 520021910605
+0x000:                      |         .pos0
+0x000: 30f40002000000000000 | init:   irmovq Stack,%rsp
+0x00a: 30f50002000000000000 |         irmovq Stack,%rbp
+0x014: 705000000000000000   |         jmp Main
+                            | 
+                            | #Data
+0x020:                      |         .align 8
+0x020:                      | ele1:
+0x020: 0a00000000000000     |         .quad 0x00a
+0x028: 3000000000000000     |         .quad ele2
+0x030:                      | ele2:
+0x030: b000000000000000     |         .quad 0x0b0
+0x038: 4000000000000000     |         .quad ele3
+0x040:                      | ele3:
+0x040: 000c000000000000     |         .quad 0xc00
+0x048: 0000000000000000     |         .quad 0
+                            | 
+0x050:                      | Main:
+0x050: 6300                 |         xorq %rax,%rax
+0x052: 30f72000000000000000 |         irmovq ele1,%rdi
+0x05c: 806600000000000000   |         call rsum
+0x065: 00                   |         halt
+                            | 
+0x066:                      | rsum:   
+0x066: 6277                 |         andq %rdi,%rdi
+0x068: 747c00000000000000   |         jne execute
+0x071: 30f00000000000000000 |         irmovq $0,%rax
+0x07b: 90                   |         ret
+                            | 
+0x07c:                      | execute:
+0x07c: a03f                 |         pushq %rbx
+0x07e: 50370000000000000000 |         mrmovq (%rdi),%rbx
+0x088: 30f60800000000000000 |         irmovq $8,%rsi
+0x092: 6067                 |         addq %rsi,%rdi
+0x094: 50770000000000000000 |         mrmovq (%rdi),%rdi
+0x09e: 806600000000000000   |         call rsum
+0x0a7: 6030                 |         addq %rbx,%rax
+0x0a9: b03f                 |         popq %rbx
+0x0ab: 90                   |         ret               
+                            | 
+0x200:                      |         .pos 0x200
+0x200:                      | Stack:
+                            | 

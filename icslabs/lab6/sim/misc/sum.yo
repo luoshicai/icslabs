@@ -1,0 +1,38 @@
+                            | #student ID: 520021910605
+0x000:                      |         .pos 0
+0x000: 30f40002000000000000 | init:   irmovq Stack,%rsp
+0x00a: 30f50002000000000000 |         irmovq Stack,%rbp
+0x014: 705000000000000000   |         jmp Main
+                            | 
+                            | #Data
+0x020:                      |         .align 8
+0x020:                      | ele1:   
+0x020: 0a00000000000000     |         .quad 0x00a
+0x028: 3000000000000000     |         .quad ele2
+0x030:                      | ele2:   
+0x030: b000000000000000     |         .quad 0x0b0
+0x038: 4000000000000000     |         .quad ele3
+0x040:                      | ele3:
+0x040: 000c000000000000     |         .quad 0xc00
+0x048: 0000000000000000     |         .quad 0
+                            | 
+0x050: 30f72000000000000000 | Main:   irmovq ele1,%rdi
+0x05a: 6300                 |         xorq %rax,%rax
+0x05c: 806600000000000000   |         call Sum
+0x065: 00                   |         halt
+                            | 
+0x066:                      | Sum:
+0x066: 6300                 |         xorq %rax,%rax   #value=0
+0x068: 30f20800000000000000 |         irmovq $8,%rdx   
+0x072:                      | Loop:
+0x072: 50670000000000000000 |         mrmovq (%rdi),%rsi #fetch Data
+0x07c: 6060                 |         addq %rsi,%rax     #value+=data
+0x07e: 6027                 |         addq %rdx,%rdi     #list->next
+0x080: 50770000000000000000 |         mrmovq (%rdi),%rdi #%rdi=list->next
+0x08a: 6277                 |         andq %rdi,%rdi     #update CC
+0x08c: 747200000000000000   |         jne Loop           #judge
+0x095: 90                   |         ret
+                            | 
+0x200:                      |         .pos 0x200
+0x200:                      | Stack: 
+                            |         

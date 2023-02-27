@@ -1,0 +1,11 @@
+   irmovq Stack,%rsp 
+   call Proc  
+   irmovq $10,%rdx
+   halt
+.pos 0x40
+Proc:
+   ret
+   rrmovq %rdx,%rbx
+.pos 0x80
+Stack:                
+

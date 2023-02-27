@@ -1,0 +1,38 @@
+#student ID: 520021910605
+        .pos 0
+init:   irmovq Stack,%rsp
+        irmovq Stack,%rbp
+        jmp Main
+
+#Data
+        .align 8
+ele1:   
+        .quad 0x00a
+        .quad ele2
+ele2:   
+        .quad 0x0b0
+        .quad ele3
+ele3:
+        .quad 0xc00
+        .quad 0
+
+Main:   irmovq ele1,%rdi
+        xorq %rax,%rax
+        call Sum
+        halt
+
+Sum:
+        xorq %rax,%rax   #value=0
+        irmovq $8,%rdx   
+Loop:
+        mrmovq (%rdi),%rsi #fetch Data
+        addq %rsi,%rax     #value+=data
+        addq %rdx,%rdi     #list->next
+        mrmovq (%rdi),%rdi #%rdi=list->next
+        andq %rdi,%rdi     #update CC
+        jne Loop           #judge
+        ret
+
+        .pos 0x200
+Stack: 
+        

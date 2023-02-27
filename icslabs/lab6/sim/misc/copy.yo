@@ -1,0 +1,45 @@
+                            | #student ID: 520021910605
+0x000:                      |         .pos 0
+0x000: 30f40002000000000000 | init:   irmovq Stack,%rsp
+0x00a: 30f50002000000000000 |         irmovq Stack,%rbp
+0x014: 705000000000000000   |         jmp Main
+                            | 
+                            | #data
+0x020:                      |         .align 8
+                            | #Source block
+0x020:                      | src:
+0x020: 0a00000000000000     |         .quad 0x00a
+0x028: b000000000000000     |         .quad 0x0b0
+0x030: 000c000000000000     |         .quad 0xc00
+                            | #Destination block
+0x038:                      | dest:
+0x038: 1101000000000000     |         .quad 0x111
+0x040: 2202000000000000     |         .quad 0x222
+0x048: 3303000000000000     |         .quad 0x333
+                            | 
+0x050: 6300                 | Main:   xorq %rax,%rax
+0x052: 30f72000000000000000 |         irmovq src,%rdi
+0x05c: 30f63800000000000000 |         irmovq dest,%rsi
+0x066: 30f20300000000000000 |         irmovq $3,%rdx
+0x070: 807a00000000000000   |         call copy
+0x079: 00                   |         halt
+                            | 
+0x07a:                      | copy:
+0x07a: 6300                 |         xorq %rax,%rax
+0x07c: 30fb0800000000000000 |         irmovq $8,%r11
+0x086: 30f80100000000000000 |         irmovq $1,%r8
+0x090:                      | Loop: 
+0x090: 50a70000000000000000 |         mrmovq (%rdi),%r10
+0x09a: 60b7                 |         addq %r11,%rdi
+0x09c: 63a0                 |         xorq %r10,%rax
+0x09e: 40a60000000000000000 |         rmmovq %r10,(%rsi)
+0x0a8: 60b6                 |         addq %r11,%rsi
+0x0aa: 6182                 |         subq %r8,%rdx
+0x0ac: 749000000000000000   |         jne Loop
+0x0b5: 90                   |         ret
+                            | 
+0x200:                      |         .pos 0x200
+0x200:                      | Stack:
+                            |         
+                            |         
+                            |       

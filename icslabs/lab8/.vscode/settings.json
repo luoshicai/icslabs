@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdlib.h": "c",
+        "cachelab.h": "c",
+        "time.h": "c"
+    }
+}

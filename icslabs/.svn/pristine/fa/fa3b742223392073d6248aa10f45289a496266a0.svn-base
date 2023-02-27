@@ -1,0 +1,45 @@
+#student ID: 520021910605
+        .pos 0
+init:   irmovq Stack,%rsp
+        irmovq Stack,%rbp
+        jmp Main
+
+#data
+        .align 8
+#Source block
+src:
+        .quad 0x00a
+        .quad 0x0b0
+        .quad 0xc00
+#Destination block
+dest:
+        .quad 0x111
+        .quad 0x222
+        .quad 0x333
+
+Main:   xorq %rax,%rax
+        irmovq src,%rdi
+        irmovq dest,%rsi
+        irmovq $3,%rdx
+        call copy
+        halt
+
+copy:
+        xorq %rax,%rax
+        irmovq $8,%r11
+        irmovq $1,%r8
+Loop: 
+        mrmovq (%rdi),%r10
+        addq %r11,%rdi
+        xorq %r10,%rax
+        rmmovq %r10,(%rsi)
+        addq %r11,%rsi
+        subq %r8,%rdx
+        jne Loop
+        ret
+
+        .pos 0x200
+Stack:
+        
+        
+      
